@@ -389,6 +389,7 @@ function main() {
   fill_dictionary();
 
   // show based on settings
+  checkbox_changed()
   search_changed(document.getElementById("searchbar"));
   document.getElementById("searchbar").focus();
 }
@@ -465,6 +466,22 @@ function checkbox_changed() {
     if (checkbox in checkbox_defaults) {
       localStorage.setItem(checkbox, is_checked);
     }
+  }
+
+  if (localStorage.getItem("checkbox_obscure") == "true") {
+    document.getElementById("warn_obscure").style.display = "inherit";
+  } else {
+    document.getElementById("warn_obscure").style.display = "none";
+  }
+  if (localStorage.getItem("checkbox_rare") == "true") {
+    document.getElementById("warn_rare").style.display = "inherit";
+  } else {
+    document.getElementById("warn_rare").style.display = "none";
+  }
+  if (localStorage.getItem("checkbox_uncommon") == "true") {
+    document.getElementById("warn_uncommon").style.display = "inherit";
+  } else {
+    document.getElementById("warn_uncommon").style.display = "none";
   }
   search_changed(document.getElementById("searchbar"));
 }
@@ -590,9 +607,9 @@ const checkbox_labels = {
   checkbox_core: "core",
   checkbox_widespread: "widespread",
   checkbox_common: "common",
-  checkbox_uncommon: "uncommon",
-  checkbox_rare: "rare",
-  checkbox_obscure: "obscure",
+  checkbox_uncommon: "uncommon *",
+  checkbox_rare: "rare *",
+  checkbox_obscure: "obscure **",
 };
 
 // must be strings bc localstorage only saves strings
